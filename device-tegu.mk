@@ -32,7 +32,6 @@ endif
 # display
 DEVICE_PACKAGE_OVERLAYS += device/google/tegu/tegu/overlay
 
-include device/google/tegu/audio/tegu/audio-tables.mk
 include device/google/zumapro/device-shipping-common.mk
 include device/google/gs-common/bcmbt/bluetooth.mk
 include device/google/gs-common/touch/gti/predump_gti.mk
@@ -47,10 +46,6 @@ $(call soong_config_set,lyric,radioext_interface_type,aidl)
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.ignore_hdr_camera_layers=true
 
-# Init files
-PRODUCT_COPY_FILES += \
-	device/google/tegu/conf/init.tegu.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.tegu.rc
-
 # Recovery files
 PRODUCT_COPY_FILES += \
         device/google/tegu/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.tegu.rc
@@ -61,9 +56,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
 	frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
 	frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml \
-	frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml \
-	device/google/tegu/nfc/libnfc-hal-st.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-hal-st.conf \
-	device/google/tegu/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf
+	frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml
 
 PRODUCT_PACKAGES += \
 	Tag \
@@ -76,32 +69,16 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
-	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml \
-	device/google/tegu/nfc/libse-gto-hal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libse-gto-hal.conf
+	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml
 
 # lhbm peak brightness delay: decided by kernel
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.primarydisplay.lhbm.frames_to_reach_peak_brightness=0
-
-PRODUCT_SOONG_NAMESPACES += device/google/tegu/radio/coex
-
-# Coex Configs
-PRODUCT_PACKAGES += \
-        display_primary_ssc_coex_table
 
 # Thermal VT estimator
 PRODUCT_PACKAGES += \
     libthermal_tflite_wrapper
 
-# Thermal Model
-TARGET_VENDOR_THERMAL_CONFIG_PATH := device/google/tegu/thermal
-PRODUCT_COPY_FILES += \
-	$(TARGET_VENDOR_THERMAL_CONFIG_PATH)/vt_estimation_model_tegu.tflite:$(TARGET_COPY_OUT_VENDOR)/etc/vt_estimation_model.tflite \
-	$(TARGET_VENDOR_THERMAL_CONFIG_PATH)/vt_estimation_odpm_model_tegu.tflite:$(TARGET_COPY_OUT_VENDOR)/etc/vt_estimation_odpm_model.tflite \
-	$(TARGET_VENDOR_THERMAL_CONFIG_PATH)/vt_speaker_estimation_model_tegu.tflite:$(TARGET_COPY_OUT_VENDOR)/etc/vt_speaker_estimation_model.tflite \
-
 # Bluetooth HAL
-PRODUCT_COPY_FILES += \
-	device/google/tegu/bluetooth/bt_vendor_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bt_vendor_overlay.conf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bluetooth.a2dp_offload.supported=true \
     persist.bluetooth.a2dp_offload.disabled=false \
@@ -110,14 +87,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth OPUS codec
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.opus.enabled=true
-
-# Bluetooth Tx power caps
-PRODUCT_COPY_FILES += \
-    device/google/tegu/bluetooth/bluetooth_power_limits_tegu.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits.csv \
-    device/google/tegu/bluetooth/bluetooth_power_limits_tegu_EU.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_EU.csv \
-    device/google/tegu/bluetooth/bluetooth_power_limits_tegu_JP.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_JP.csv \
-    device/google/tegu/bluetooth/bluetooth_power_limits_tegu_US.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_US.csv \
-    device/google/tegu/bluetooth/bluetooth_power_limits_tegu_CA.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_CA.csv
 
 # POF
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -158,14 +127,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
 	ro.bluetooth.leaudio_offload.supported=true \
 	persist.bluetooth.leaudio_offload.disabled=false \
-
-# Include Bluetooth soong namespace
-PRODUCT_SOONG_NAMESPACES += \
-    device/google/tegu/bluetooth
-
-# Bluetooth LE Auido offload capabilities setting
-PRODUCT_PACKAGES += \
-    le_audio_codec_capabilities.xml
 
 # LE Audio toggle shown by default
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -225,7 +186,8 @@ PRODUCT_PACKAGES += \
     SettingsTeguOverlay
 
 # Location
-include device/google/tegu/location/device-gnss.mk
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/gps/lsi/sepolicy
+
 # For GPS property
 PRODUCT_VENDOR_PROPERTIES += ro.vendor.gps.pps.enabled=true
 
@@ -300,28 +262,13 @@ PRODUCT_VENDOR_PROPERTIES += \
     persist.vendor.udfps.set_lhbm_in_advance=true \
     persist.vendor.udfps.auto_exposure_compensation_supported=true
 
-# Battery Mitigation Config
-ifeq (,$(TARGET_VENDOR_BATTERY_MITIGATION_CONFIG_PATH))
-TARGET_VENDOR_BATTERY_MITIGATION_CONFIG_PATH := device/google/tegu/battery_mitigation
-endif
-
 # Telephony Satellite Feature
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.satellite.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.satellite.xml
 
-PRODUCT_COPY_FILES += \
-	$(TARGET_VENDOR_BATTERY_MITIGATION_CONFIG_PATH)/bm_config_tegu.json:$(TARGET_COPY_OUT_VENDOR)/etc/bm_config.json
-
 # Set support for LEA multicodec
 PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.core.le_audio.codec_extension_aidl.enabled=true
-
-# LE Audio configuration scenarios
-PRODUCT_COPY_FILES += \
-    device/google/tegu/bluetooth/audio_set_scenarios.json:$(TARGET_COPY_OUT_VENDOR)/etc/aidl/le_audio/aidl_audio_set_scenarios.json
-
-PRODUCT_COPY_FILES += \
-    device/google/tegu/bluetooth/audio_set_configurations.json:$(TARGET_COPY_OUT_VENDOR)/etc/aidl/le_audio/aidl_audio_set_configurations.json
 
 # Enable APF by default
 PRODUCT_VENDOR_PROPERTIES += \

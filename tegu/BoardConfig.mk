@@ -18,8 +18,6 @@ TARGET_BOARD_INFO_FILE := device/google/tegu/board-info.txt
 TARGET_BOOTLOADER_BOARD_NAME := tegu
 TARGET_SCREEN_DENSITY := 420
 
-include device/google/tegu/device-tegu-common.mk
-
 include device/google/zumapro/BoardConfig-common.mk
 include device/google/tegu/sepolicy/tegu-sepolicy.mk
 include device/google/tegu/wifi/BoardConfig-wifi.mk
