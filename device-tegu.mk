@@ -28,10 +28,28 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
 
 include device/google/zumapro/device-shipping-common.mk
-include device/google/gs-common/bcmbt/bluetooth.mk
-include device/google/gs-common/touch/gti/predump_gti.mk
-include device/google/gs-common/touch/syna/predump_syna20.mk
-include device/google/gs-common/gril/aidl/2.0/gril_aidl.mk
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth.prebuilt.xml \
+    android.hardware.bluetooth_le.prebuilt.xml
+
+DEVICE_MANIFEST_FILE += device/google/gs-common/bcmbt/manifest_bluetooth.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/bcmbt/compatibility_matrix.xml
+
+# Touch
+PRODUCT_PACKAGES += \
+    dump_touch.sh \
+    predump_gti0.sh \
+    predump_syna.sh \
+    predump_touch.sh \
+    touch_gti_ical
+
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.vendor.touch.dump.sys=/sys/devices/platform/111d0000.spi/spi_master/spi20/spi20.0/synaptics_tcm.0/sysfs
+
+# Google RIL
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/gril/aidl/2.0/compatibility_matrix.xml
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.ignore_hdr_camera_layers=true
 
@@ -169,9 +187,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SettingsTeguOverlay
 
-# Location
-BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/gps/lsi/sepolicy
-
 # For GPS property
 PRODUCT_VENDOR_PROPERTIES += ro.vendor.gps.pps.enabled=true
 
@@ -308,4 +323,4 @@ PRODUCT_PACKAGES += \
     sensors.dynamic_sensor_hal
 
 # Wireless charging
-include device/google/gs-common/wireless_charger/wireless_charger.mk
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/wireless_charger/compatibility_matrix.xml
