@@ -322,5 +322,9 @@ TARGET_VENDOR_PROP += device/google/tegu/tegu/vendor.prop
 PRODUCT_PACKAGES += \
     sensors.dynamic_sensor_hal
 
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    device/google/tegu
+
 # Wireless charging
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/wireless_charger/compatibility_matrix.xml
