@@ -55,7 +55,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.ignore_hdr_camera_layer
 
 # Recovery files
 PRODUCT_COPY_FILES += \
-        device/google/tegu/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.tegu.rc
+    device/google/tegu/recovery/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.tegu.rc
 
 # NFC
 PRODUCT_COPY_FILES += \
