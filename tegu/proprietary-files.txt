@@ -78,6 +78,13 @@ product/priv-app/DiagMon/DiagMon.apk
 product/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
 product/priv-app/TetheringEntitlement/TetheringEntitlement.apk
 
+# TTS
+product/tts/google/de-de/de-de-x-multi-r57.zvoice
+product/tts/google/es-es/es-es-x-multi-r56.zvoice
+product/tts/google/fr-fr/fr-fr-x-multi-r57.zvoice
+product/tts/google/it-it/it-it-x-multi-r54.zvoice
+product/tts/google/ja-jp/ja-jp-x-multi-r55.zvoice
+
 # VZW
 product/app/VZWAPNLib/VZWAPNLib.apk;PRESIGNED
 product/etc/permissions/com.android.omadm.service.xml
@@ -177,6 +184,10 @@ system_ext/etc/permissions/com.samsung.slsi.telephony.oemril.xml
 system_ext/etc/permissions/oemrilhook.xml
 system_ext/framework/oemrilhook.jar
 system_ext/priv-app/OemRilService/OemRilService.apk;PRESIGNED
+
+# Watchdog
+system_ext/bin/gs_watchdogd
+system_ext/etc/init/init.gs_watchdogd.rc
 
 # VZW
 system_ext/etc/permissions/vzw_mvs_permissions.xml

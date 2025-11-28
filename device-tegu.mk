@@ -38,13 +38,6 @@ DEVICE_MANIFEST_FILE += device/google/gs-common/bcmbt/manifest_bluetooth.xml
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/bcmbt/compatibility_matrix.xml
 
 # Touch
-PRODUCT_PACKAGES += \
-    dump_touch.sh \
-    predump_gti0.sh \
-    predump_syna.sh \
-    predump_touch.sh \
-    touch_gti_ical
-
 PRODUCT_VENDOR_PROPERTIES += \
     ro.vendor.touch.dump.sys=/sys/devices/platform/111d0000.spi/spi_master/spi20/spi20.0/synaptics_tcm.0/sysfs
 
@@ -286,10 +279,6 @@ PRODUCT_PACKAGES += \
     libEGL_angle \
     libGLESv1_CM_angle \
     libGLESv2_angle
-
-# Dumpstate
-PRODUCT_PACKAGES += \
-    dump_gsc.sh
 
 # EUICC
 PRODUCT_COPY_FILES += \
