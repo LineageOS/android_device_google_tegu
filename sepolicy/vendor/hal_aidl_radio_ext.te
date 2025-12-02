@@ -1,0 +1,25 @@
+type hal_aidl_radio_ext, domain;
+type hal_aidl_radio_ext_exec, exec_type, file_type, vendor_file_type;
+
+add_service(hal_aidl_radio_ext, hal_radio_ext_service)
+
+binder_call(hal_aidl_radio_ext, grilservice_app)
+binder_call(hal_aidl_radio_ext, hal_bluetooth_btlinux)
+binder_call(hal_aidl_radio_ext, servicemanager)
+
+get_prop(hal_aidl_radio_ext, hwservicemanager_prop)
+get_prop(hal_aidl_radio_ext, telephony_modemtype_prop)
+
+init_daemon_domain(hal_aidl_radio_ext)
+
+set_prop(hal_aidl_radio_ext, vendor_gril_prop)
+
+allow hal_aidl_radio_ext hal_bluetooth_coexistence_hwservice:hwservice_manager find;
+allow hal_aidl_radio_ext hal_bluetooth_coexistence_service:service_manager find;
+allow hal_aidl_radio_ext radio_device:chr_file rw_file_perms;
+allow hal_aidl_radio_ext radio_vendor_data_file:dir create_dir_perms;
+allow hal_aidl_radio_ext radio_vendor_data_file:file create_file_perms;
+allow hal_aidl_radio_ext sysfs_display:dir search;
+allow hal_aidl_radio_ext sysfs_display:file rw_file_perms;
+allow hal_aidl_radio_ext sysfs_leds:dir search;
+allow hal_aidl_radio_ext sysfs_leds:file rw_file_perms;

@@ -1,0 +1,4 @@
+platform_app vendor_fw_file dir b/372122443
+platform_app vendor_rild_prop file b/372122443
+system_suspend sysfs dir b/371877715
+system_suspend sysfs dir b/372121671
