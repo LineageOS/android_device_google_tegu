@@ -122,10 +122,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.bqr.vnd_trace_mask=0 \
     persist.bluetooth.vendor.btsnoop=false
 
-# Enable Bluetooth AutoOn feature
-PRODUCT_PRODUCT_PROPERTIES += \
-    bluetooth.server.automatic_turn_on=true
-
 # Set support One-handed mode
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.support_one_handed_mode=true
