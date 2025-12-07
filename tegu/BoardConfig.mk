@@ -5,12 +5,11 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-TARGET_BOARD_INFO_FILE := device/google/tegu/board-info.txt
-TARGET_BOOTLOADER_BOARD_NAME := tegu
+TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
+TARGET_BOOTLOADER_BOARD_NAME := $(DEVICE_CODENAME)
 TARGET_SCREEN_DENSITY := 420
 
 include device/google/zumapro/BoardConfig-common.mk
-include device/google/tegu/wifi/BoardConfig-wifi.mk
 
 # Kernel modules
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/recovery/modules.blocklist.vendor_kernel_boot
@@ -20,8 +19,11 @@ BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES += $(addprefix $(KERNEL_MODULE_DIR)/,
 
 # SEPolicy
 BOARD_VENDOR_SEPOLICY_DIRS += \
-    device/google/tegu/sepolicy/vendor \
+    $(DEVICE_PATH)/sepolicy/vendor \
     hardware/google/pixel-sepolicy/vibrator/common \
     hardware/google/pixel-sepolicy/vibrator/cs40l26
+
+# WiFi
+include $(DEVICE_PATH)/wifi/BoardConfig-wifi.mk
 
 include $(VENDOR_PATH)/BoardConfigVendor.mk
