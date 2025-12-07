@@ -34,15 +34,9 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.prebuilt.xml \
     android.hardware.bluetooth_le.prebuilt.xml
 
-DEVICE_MANIFEST_FILE += device/google/gs-common/bcmbt/manifest_bluetooth.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/bcmbt/compatibility_matrix.xml
-
 # Touch
 PRODUCT_VENDOR_PROPERTIES += \
     ro.vendor.touch.dump.sys=/sys/devices/platform/111d0000.spi/spi_master/spi20/spi20.0/synaptics_tcm.0/sysfs
-
-# Google RIL
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/gril/aidl/2.0/compatibility_matrix.xml
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.ignore_hdr_camera_layers=true
 
@@ -306,6 +300,3 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/vendor.prop
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.dynamic_sensor_hal
-
-# Wireless charging
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/wireless_charger/compatibility_matrix.xml
