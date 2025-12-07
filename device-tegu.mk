@@ -58,74 +58,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
 	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml
 
-# Bluetooth OPUS codec
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.opus.enabled=true
-
-# POF
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.bluetooth.finder.supported=true
-
-# Bluetooth AAC VBR
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.a2dp_aac.vbr_supported=true
-
-# Bluetooth Super Wide Band
-PRODUCT_PRODUCT_PROPERTIES += \
-    bluetooth.hfp.swb.supported=true
-
-# Bluetooth LE Audio
-PRODUCT_PRODUCT_PROPERTIES += \
-	ro.bluetooth.leaudio_switcher.supported=true \
-	bluetooth.profile.bap.unicast.client.enabled=true \
-	bluetooth.profile.csip.set_coordinator.enabled=true \
-	bluetooth.profile.hap.client.enabled=true \
-	bluetooth.profile.mcp.server.enabled=true \
-	bluetooth.profile.ccp.server.enabled=true \
-	bluetooth.profile.vcp.controller.enabled=true \
-
-# Bluetooth LE Audio enable hardware offloading
-PRODUCT_PRODUCT_PROPERTIES += \
-	ro.bluetooth.leaudio_offload.supported=true \
-	persist.bluetooth.leaudio_offload.disabled=false \
-
-# LE Audio toggle shown by default
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.leaudio.toggle_visible=true
-
-# LE Audio use classic connection by default
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.bluetooth.leaudio.le_audio_connection_by_default=true
-
-# Bluetooth LE Audio CIS handover to SCO
-# Set the property only for the controller couldn't support CIS/SCO simultaneously. More detailed in b/242908683.
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.leaudio.notify.idle.during.call=true
-
-# Bluetooth LE Audio enable dual mic SWB call
-PRODUCT_PRODUCT_PROPERTIES += \
-    bluetooth.leaudio.dual_bidirection_swb.supported=true
-
-# LE Audio Unicast Allowlist
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5
-
-# Keyboard height ratio and bottom padding in dp for portrait mode
-PRODUCT_PRODUCT_PROPERTIES += \
-          ro.com.google.ime.kb_pad_port_b=8 \
-          ro.com.google.ime.height_ratio=1.09
-
-# Override BQR mask to enable LE Audio Choppy report, remove BTRT logging
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.bqr.event_mask=295006 \
-    persist.bluetooth.bqr.vnd_quality_mask=16 \
-    persist.bluetooth.bqr.vnd_trace_mask=0 \
-    persist.bluetooth.vendor.btsnoop=false
-
-# Set support One-handed mode
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.support_one_handed_mode=true
-
 # WiFi Overlay
 PRODUCT_PACKAGES += \
     WifiOverlay2024_M25
@@ -134,22 +66,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SettingsTeguOverlay
 
-# Setup Wizard device-specific settings
-PRODUCT_PRODUCT_PROPERTIES += \
-    setupwizard.feature.enable_quick_start_flow=true
-
-# Quick Start device-specific settings
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.quick_start.oem_id=00e0 \
-    ro.quick_start.device_id=tegu
-
 # Telephony Satellite Feature
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.satellite.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.satellite.xml
-
-# Set support for LEA multicodec
-PRODUCT_PRODUCT_PROPERTIES += \
-    bluetooth.core.le_audio.codec_extension_aidl.enabled=true
 
 # ANGLE - Almost Native Graphics Layer Engine
 PRODUCT_PACKAGES += \
@@ -180,6 +99,7 @@ PRODUCT_PACKAGES += \
     PixelDisplayServiceOverlayTegu
 
 # Properties
+TARGET_PRODUCT_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/product.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/vendor.prop
 
 # Sensors
