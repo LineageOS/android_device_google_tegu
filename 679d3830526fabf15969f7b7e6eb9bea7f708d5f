@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c8ccdd6_72100973",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 36704
+      },
+      "writtenOn": "2026-02-21T23:13:58Z",
+      "side": 1,
+      "message": "Hi there! I\u0027ve added you as reviewer since you appear to own several PRs for tegu devices in the past :)",
+      "revId": "679d3830526fabf15969f7b7e6eb9bea7f708d5f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
