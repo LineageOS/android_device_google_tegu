@@ -42,6 +42,9 @@ PRODUCT_PACKAGES += \
     SystemUIGoogleOverlayProductTegu \
     SystemUIGoogleOverlayVendorTegu
 
+PRODUCT_PACKAGES += \
+    ApertureOverlayTegu
+
 # Properties
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/product.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/vendor.prop
