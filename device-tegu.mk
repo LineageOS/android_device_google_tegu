@@ -27,9 +27,6 @@ PRODUCT_PACKAGES += \
     hwservicemanager
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    device/google/tegu/overlay-lineage
-
 PRODUCT_PACKAGES += \
     DMServiceOverlayVendorTegu \
     FrameworkResOverlayProductTegu \
