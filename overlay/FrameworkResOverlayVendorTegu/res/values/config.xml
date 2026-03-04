@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Indicate whether to allow the device to suspend when the screen is off
+         due to the proximity sensor.  This resource should only be set to true
+         if the sensor HAL correctly handles the proximity sensor as a wake-up source.
+         Otherwise, the device may fail to wake out of suspend reliably.
+         The default is false. -->
+    <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
+
+    <!-- Default screen brightness setting set.
+         -2 is invalid so setting will resort to int value specified above.
+         Must be in the range specified by minimum and maximum. -->
+    <item name="config_screenBrightnessSettingDefaultFloat" format="float" type="dimen">0.077178635</item>
+
+    <!-- MMS user agent string, for example OemNameDeviceName
+         If the string contains a '%s' format string then that substring will be replaced
+         with the value of Build.MODEL , ie
+         <string name="config_mms_user_agent">OemName%s</string> -->
+    <string name="config_mms_user_agent">g9qxm</string>
+
+    <!-- MMS user agent prolfile url, for example https://uaprof.oem_name.com/DeviceName.xml
+         if the string contains a '%s' format string then that substring will be replaced
+         with the value of Build.MODEL , ie https://uaprof.oem_name.com/%s.xml -->
+    <string name="config_mms_user_agent_profile_url">http://www.gstatic.com/android/sms/G9QXM.xml</string>
+
+    <!-- Type of the udfps long press sensor. Empty if long press is not supported. -->
+    <string name="config_dozeUdfpsLongPressSensorType">com.google.sensor.long_press</string>
+
+    <!-- Type of the quick pickup sensor. Empty if quick pickup is not supported. -->
+    <string name="config_quickPickupSensorType">com.google.sensor.quick_pickup</string>
+
+    <!-- The bounding path of the cutout region of the main built-in display.
+         Must either be empty if there is no cutout region, or a string that is parsable by
+         {@link android.util.PathParser}.
+
+         The path is assumed to be specified in display coordinates with pixel units and in
+         the display's native orientation, with the origin of the coordinate system at the
+         center top of the display. Optionally, you can append either `@left` or `@right` to the
+         end of the path string, in order to change the path origin to either the top left,
+         or top right of the display.
+
+         To facilitate writing device-independent emulation overlays, the marker `@dp` can be
+         appended after the path string to interpret coordinates in dp instead of px units.
+         Note that a physical cutout should be configured in pixels for the best results.
+
+         If the display supports multiple resolutions, please define the path config based on the
+         highest resolution so that it can be scaled correctly in each resolution.
+
+         Example for a 10px x 10px square top-center cutout:
+                <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z</string>
+         Example for a 10dp x 10dp square top-center cutout:
+                <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z @dp</string>
+
+         @see https://www.w3.org/TR/SVG/paths.html#PathData
+         -->
+    <string name="config_mainBuiltInDisplayCutout">m 581.5,86 a 41.5,41.5 0 0 0 -83,0 41.5,41.5 0 0 0 83,0 z @left</string>
+
+    <!-- Like config_mainBuiltInDisplayCutout, but this path is used to report the
+         one single bounding rect per device edge to the app via
+         {@link DisplayCutout#getBoundingRect}. Note that this path should try to match the visual
+         appearance of the cutout as much as possible, and may be smaller than
+         config_mainBuiltInDisplayCutout
+         -->
+    <string name="config_mainBuiltInDisplayCutoutRectApproximation">m 484,0 h 112 v 152 h -112 z @left</string>
+
+    <!-- The max vibration strength allowed in audio haptic channels, must be positive or zero if
+         limit is unknown. -->
+    <item name="config_hapticChannelMaxVibrationAmplitude" format="float" type="dimen">0.32</item>
+
+    <!-- The stable device width and height in pixels. If these aren't set to a positive number
+         then the device will use the width and height of the default display the first time it's
+         booted.  -->
+    <integer name="config_stableDeviceDisplayWidth">1080</integer>
+    <integer name="config_stableDeviceDisplayHeight">2424</integer>
+
+    <!-- The default peak refresh rate for a given device. Change this value if you want to prevent
+         the framework from using higher refresh rates, even if display modes with higher refresh
+         rates are available from hardware composer. Only has an effect if the value is
+         non-zero. -->
+    <integer name="config_defaultPeakRefreshRate">60</integer>
+
+    <!-- The display uses different gamma curves for different refresh rates. It's hard for panel
+         vendors to tune the curves to have exact same brightness for different refresh rate. So
+         flicker could be observed at switch time. The issue is worse at the gamma lower end.
+         In addition, human eyes are more sensitive to the flicker at darker environment.
+         To prevent flicker, we only support higher refresh rates if the display brightness is above
+         a threshold.
+         For example, no higher refresh rate if
+             display brightness <= disp0 && ambient brightness <= amb0
+             || display brightness <= disp1 && ambient brightness <= amb1
+         Brightness thresholds are paired with lux thresholds - they both have to be met.
+         A negative brightness or lux value means that only one threshold should be used - e.g. if
+         the brightness value is negative, only the lux threshold is applied. -->
+    <!-- Low zone brightness thresholds in the range [0, 255] -->
+    <integer-array name="config_brightnessThresholdsOfPeakRefreshRate">
+        <item>2</item>
+    </integer-array>
+
+    <!-- Low zone lux thresholds -->
+    <integer-array name="config_ambientThresholdsOfPeakRefreshRate">
+        <item>5</item>
+    </integer-array>
+
+    <!-- Default refresh rate in the zone defined by brightness and ambient thresholds.
+         If non-positive, then the refresh rate is unchanged even if thresholds are configured. -->
+    <integer name="config_defaultRefreshRateInZone">120</integer>
+
+    <!-- Default refresh rate while the device has high brightness mode enabled for HDR. -->
+    <integer name="config_defaultRefreshRateInHbmHdr">60</integer>
+
+    <!-- A string config in svg path format for the main display shape.
+         (@see https://www.w3.org/TR/SVG/paths.html#PathData).
+
+         This config must be set unless:
+         1. {@link Configuration#isScreenRound} is true which means the display shape is circular
+            and the system will auto-generate a circular shape.
+         2. The display has no rounded corner and the system will auto-generate a rectangular shape.
+         (@see DisplayShape#createDefaultDisplayShape)
+
+         Note: If the display supports multiple resolutions, please define the path config based on
+         the highest resolution so that it can be scaled correctly in each resolution. -->
+    <string name="config_mainDisplayShape">m 1079.946,2228.66 c 0,0 0.18,21.63 -0.12,32.44 -0.27,9.87 -0.39,19.77 -1.53,29.57 -1.13,9.74 -2.58,19.5 -5.23,28.95 -2.71,9.67 -6.21,19.2 -10.829,28.12 -4.72,9.13 -10.449,17.83 -17.099,25.68 -6.69,7.9 -14.379,15.04 -22.689,21.24 -7.73,5.77 -16.209,10.61 -24.989,14.62 -8.57,3.91 -17.619,6.81 -26.769,9.05 -8.96,2.2 -18.159,3.37 -27.339,4.29 -9.29,0.93 -18.649,1.01 -27.979,1.23 -10.229,0.24 -30.698,0.1 -30.698,0.1 H 195.323 c 0,0 -21.629,0.17 -32.438,-0.12 -9.869,-0.27 -19.769,-0.39 -29.568,-1.53 -9.739,-1.13 -19.499,-2.59 -28.938,-5.23 -9.669,-2.71 -19.199,-6.21 -28.119,-10.83 -9.14,-4.73 -17.829,-10.46 -25.669,-17.1 -7.91,-6.7 -15.039,-14.39 -21.229,-22.69 -5.77,-7.74 -10.619,-16.21 -14.619,-24.99 -3.91,-8.57 -6.81,-17.62 -9.05,-26.77 -2.2,-8.96 -3.37,-18.16 -4.29,-27.34 -0.93,-9.29 -1.01,-18.65 -1.24,-27.98 -0.24,-10.23 -0.1,-30.7 -0.1,-30.7 L 0.054,195.334 c 0,0 -0.18,-21.63 0.12,-32.44 C 0.444,153.024 0.564,143.124 1.703,133.324 2.833,123.584 4.283,113.824 6.933,104.374 9.643,94.704 13.143,85.174 17.763,76.254 22.482,67.124 28.212,58.424 34.862,50.584 41.551,42.684 49.241,35.544 57.551,29.344 65.28,23.574 73.76,18.734 82.539,14.724 91.109,10.824 100.158,7.924 109.308,5.674 c 8.96,-2.2 18.159,-3.37 27.339,-4.29 9.29,-0.93 18.649,-1.01 27.979,-1.23 10.229,-0.24 30.698,-0.1 30.698,-0.1 h 689.314 c 0,0 21.629,-0.18 32.438,0.12 9.869,0.27 19.769,0.39 29.568,1.53 9.739,1.13 19.499,2.59 28.938,5.23 9.669,2.71 19.199,6.21 28.119,10.83 9.14,4.73 17.829,10.46 25.669,17.1 7.91,6.7 15.039,14.39 21.229,22.69 5.77,7.74 10.619,16.21 14.619,24.99 3.91,8.57 6.81,17.62 9.05,26.77 2.2,8.96 3.37,18.16 4.29,27.34 0.93,9.29 1.01,18.65 1.24,27.98 0.24,10.23 0.1,30.7 0.1,30.7 z</string>
+</resources>

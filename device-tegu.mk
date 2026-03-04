@@ -20,9 +20,6 @@ ifneq ($(TARGET_BOOTS_16K),true)
 PRODUCT_16K_DEVELOPER_OPTION := true
 endif
 
-DEVICE_PACKAGE_OVERLAYS += device/google/tegu/tegu/overlay
-DEVICE_PACKAGE_OVERLAYS += device/google/tegu/overlay-lineage
-
 # Audio
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
@@ -47,8 +44,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml
 
 PRODUCT_PACKAGES += \
-	android.hardware.nfc-service.st \
-	NfcOverlayTegu
+	android.hardware.nfc-service.st
 
 # SecureElement
 PRODUCT_PACKAGES += \
@@ -57,14 +53,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
 	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml
-
-# WiFi Overlay
-PRODUCT_PACKAGES += \
-    WifiOverlay2024_M25
-
-# Settings Overlay
-PRODUCT_PACKAGES += \
-    SettingsTeguOverlay
 
 # Telephony Satellite Feature
 PRODUCT_COPY_FILES += \
@@ -79,9 +67,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.mep.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.mep.xml \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
 
-PRODUCT_PACKAGES += \
-    EuiccSupportPixelOverlay
-
 # Fingerprint
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
@@ -95,8 +80,20 @@ PRODUCT_PACKAGES += \
     init.recovery.tegu.touch.rc
 
 # Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    device/google/tegu/overlay-lineage
+
 PRODUCT_PACKAGES += \
-    PixelDisplayServiceOverlayTegu
+    DMServiceOverlayVendorTegu \
+    FrameworkResOverlayProductTegu \
+    FrameworkResOverlayVendorTegu \
+    PixelDisplayServiceOverlayProductTegu \
+    PixelNfcOverlayTegu \
+    SafetyRegulatoryInfoOverlayProductTegu \
+    SettingsGoogleOverlayVendorTegu \
+    SettingsTeguOverlay \
+    SystemUIGoogleOverlayProductTegu \
+    SystemUIGoogleOverlayVendorTegu
 
 # Properties
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/product.prop
