@@ -5,9 +5,6 @@ ro.vendor.bluetooth.evb_bdaddr=22:22:22:33:44:55
 # DCK
 ro.gms.dck.eligible_wcc=2
 
-# Device family
-ro.build.device_family=CM4KM4TK4TG4
-
 # Display
 ro.vendor.display.read_temp_interval=30
 ro.vendor.primarydisplay.google-tg4a.temperature_path=/dev/thermal/tz-by-name/disp_therm/temp
@@ -22,6 +19,7 @@ persist.vendor.udfps.fps_touch_handler.handle_down_up_events=true
 persist.vendor.udfps.fps_touch_handler_supported=false
 persist.vendor.udfps.fth.touch_resolution_scaling_factor=10
 persist.vendor.udfps.max_touch_filter_supported=true
+persist.vendor.udfps.screen_off_unlock_supported=true
 persist.vendor.udfps.set_lhbm_in_advance=true
 ro.vendor.fingerprint.ta.name=g7a.app
 
@@ -36,15 +34,16 @@ hypervisor.memory_reclaim.supported=1
 
 # Radio
 persist.vendor.ril.use_radio_hal=2.2
+ro.vendor.ril.use_radio_hal=2.2
 
 # SVN
-ro.vendor.build.svn=33
-
-# Touch
-ro.vendor.touch.dump.sys=/sys/devices/platform/111d0000.spi/spi_master/spi20/spi20.0/synaptics_tcm.0/sysfs
+ro.vendor.build.svn=43
 
 # Vibrator HAL
 persist.vendor.vibrator.hal.context.scale=40
 ro.vendor.vibrator.hal.f0.comp.enabled=1
 ro.vendor.vibrator.hal.redc.comp.enabled=0
 vendor.audio.hapticgenerator.distortion.output.gain=0.29
+
+# Wi-Fi
+ro.vendor.wifi.model=bcm4383
