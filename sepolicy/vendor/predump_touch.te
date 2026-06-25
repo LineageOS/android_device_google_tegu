@@ -1,6 +1,0 @@
-type sysfs_touch, fs_type, sysfs_type;
-
-get_prop(predump_touch, vendor_touch_dump_path_prop)
-
-allow predump_touch sysfs_touch:dir r_dir_perms;
-allow predump_touch sysfs_touch:file rw_file_perms;
