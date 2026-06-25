@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Indicates the maximum allowed data mode specified by the OEMs. It ensures the entitled and
+         carrier config overridden data mode by the carrier is within this value.
+         Refer to {@link CarrierConfigManager#SATELLITE_DATA_SUPPORT_MODE} to see the possible values -->
+    <integer name="max_allowed_data_mode">0</integer>
+</resources>
