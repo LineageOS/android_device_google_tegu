@@ -1,6 +1,6 @@
 # Bluetooth
 bluetooth.ble.client.subrate_le_audio_mode_max_subrate.config=2
-bluetooth.ble.client.subrate_le_audio_mode_min_subrate.config=2
+bluetooth.ble.client.subrate_le_audio_mode_min_subrate.config=1
 bluetooth.device_id.product_id=16660
 bluetooth.profile.gmap.enabled=true
 persist.bluetooth.bqr.event_mask=295262
